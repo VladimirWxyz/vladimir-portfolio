@@ -1,4 +1,7 @@
 export type ExternalUrl = `https://${string}`;
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const asset = (path: string) => `${basePath}${path}`;
+
 export interface Profile {
   readonly name: string;
   readonly role: string;
@@ -16,7 +19,7 @@ export const profile: Profile = {
   intro: 'Creo interfaces con React, JavaScript y atención a cada interacción.',
   about:
     'Me gusta convertir una idea visual en algo que puedas tocar, recorrer y usar. Mi terreno es el frontend: estructura, estilo e interacción.',
-  avatarUrl: '/images/vladimir-williams-avatar.webp',
+  avatarUrl: asset('/images/vladimir-williams-avatar.webp'),
   email: 'vladimirwilliams.xyz@gmail.com',
   github: 'https://github.com/VladimirWxyz',
   linkedin: 'https://www.linkedin.com/in/vladimir-williams-dev/',
@@ -72,57 +75,57 @@ export const projects = [
       'Proyecto desarrollado en colaboración. Mi responsabilidad fue el módulo completo para cafeterías y restaurantes.',
     images: [
       {
-        src: '/images/projects/galeria/00-overview.webp?v=2',
+        src: asset('/images/projects/galeria/00-overview.webp?v=2'),
         alt: 'Vista administrativa de la cafetería con catálogo de productos y accesos de gestión.',
         caption: 'Administración y catálogo',
       },
       {
-        src: '/images/projects/galeria/01-sharing-qr.webp?v=2',
+        src: asset('/images/projects/galeria/01-sharing-qr.webp?v=2'),
         alt: 'Pantalla para compartir la galería mediante código QR, enlace y WhatsApp.',
         caption: 'Publicación mediante QR',
       },
       {
-        src: '/images/projects/galeria/02-configuration.webp?v=2',
+        src: asset('/images/projects/galeria/02-configuration.webp?v=2'),
         alt: 'Menú de configuración con accesos a caja, mesas, pagos, personal y tablero del mesero.',
         caption: 'Configuración del local',
       },
       {
-        src: '/images/projects/galeria/03-cash-register.webp?v=2',
+        src: asset('/images/projects/galeria/03-cash-register.webp?v=2'),
         alt: 'Panel de caja con apertura de turno, conciliaciones y resumen de movimientos.',
         caption: 'Apertura y control de caja',
       },
       {
-        src: '/images/projects/galeria/04-tables.webp?v=2',
+        src: asset('/images/projects/galeria/04-tables.webp?v=2'),
         alt: 'Administración de mesas con puestos, códigos QR y acciones de edición.',
         caption: 'Mesas y códigos QR',
       },
       {
-        src: '/images/projects/galeria/05-payments.webp?v=2',
+        src: asset('/images/projects/galeria/05-payments.webp?v=2'),
         alt: 'Configuración de métodos de pago móvil y Binance Pay.',
         caption: 'Métodos y datos de pago',
       },
       {
-        src: '/images/projects/galeria/06-staff.webp?v=2',
+        src: asset('/images/projects/galeria/06-staff.webp?v=2'),
         alt: 'Gestión del personal del local con roles y estados activos.',
         caption: 'Personal y roles',
       },
       {
-        src: '/images/projects/galeria/07-waiter-dashboard.webp?v=2',
+        src: asset('/images/projects/galeria/07-waiter-dashboard.webp?v=2'),
         alt: 'Tablero de servicio para meseros con el estado de las mesas.',
         caption: 'Tablero del mesero',
       },
       {
-        src: '/images/projects/galeria/08-order-taking.webp?v=2',
+        src: asset('/images/projects/galeria/08-order-taking.webp?v=2'),
         alt: 'Flujo para tomar el pedido de una mesa con productos y variantes disponibles.',
         caption: 'Toma de pedidos',
       },
       {
-        src: '/images/projects/galeria/09-customer-actions.webp?v=2',
+        src: asset('/images/projects/galeria/09-customer-actions.webp?v=2'),
         alt: 'Vista del comensal con acciones para llamar al mesero y pedir la cuenta.',
         caption: 'Atención desde la mesa',
       },
       {
-        src: '/images/projects/galeria/10-customer-menu.webp?v=2',
+        src: asset('/images/projects/galeria/10-customer-menu.webp?v=2'),
         alt: 'Menú de solo lectura para el comensal con búsqueda, productos y precios.',
         caption: 'Menú para el comensal',
       },
@@ -145,7 +148,7 @@ export const projects = [
     sourceUrl: 'https://github.com/VladimirWxyz/API-Rick-Morty-Multiverse',
     images: [
       {
-        src: '/images/projects/rick-and-morty/overview.webp',
+        src: asset('/images/projects/rick-and-morty/overview.webp'),
         alt: 'Aplicación Multiverso Rick y Morty con buscador, filtros y tarjetas de personajes.',
         caption: 'Exploración y filtros de personajes',
         width: 1500,
@@ -170,7 +173,7 @@ export const projects = [
     sourceUrl: 'https://github.com/VladimirWxyz/Catalogo-peliculas',
     images: [
       {
-        src: '/images/projects/movie-catalog/overview.webp',
+        src: asset('/images/projects/movie-catalog/overview.webp'),
         alt: 'Catálogo de películas con buscador y tarjetas de títulos, duración y acceso al tráiler.',
         caption: 'Búsqueda y catálogo de películas',
         width: 1500,

@@ -6,7 +6,9 @@ export const metadata: Metadata = {
   title: 'Vladimir Williams — Frontend Developer',
   description:
     'Interfaces con personalidad, construidas con React, TypeScript, JavaScript, HTML y CSS. El portafolio de Vladimir Williams.',
-  icons: { icon: '/favicon.svg' },
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/favicon.svg`,
+  },
   authors: [{ name: 'Vladimir Williams' }],
   creator: 'Vladimir Williams',
 };
