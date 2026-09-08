@@ -1,0 +1,120 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--secondary);
+  --color-accent-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-destructive: #ff899e;
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-mono:
+    ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+}
+:root {
+  color-scheme: dark;
+  --background: #04131c;
+  --foreground: #f0f8fb;
+  --card: #0a202b;
+  --secondary: #102d3a;
+  --primary: #27e0ce;
+  --primary-foreground: #03201f;
+  --muted-foreground: #a0b9c4;
+  --border: #20424f;
+  --violet: #9c91ff;
+  --gradient: linear-gradient(115deg, #27e0ce, #77d3f1 52%, #9c91ff);
+  --radius: 1.25rem;
+  --space-section: clamp(3.5rem, 7vw, 6.5rem);
+  --layer-decoration: 0;
+  --layer-content: 1;
+  --layer-header: 20;
+  --layer-overlay: 50;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: #27e0ce45;
+  color: #fff;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button,
+input {
+  font: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 5px;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.12;
+  font-weight: 500;
+}
+svg {
+  flex-shrink: 0;
+}
+.container {
+  width: min(1120px, calc(100% - 4rem));
+  margin-inline: auto;
+}
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.8rem 1rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
