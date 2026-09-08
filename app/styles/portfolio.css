@@ -206,6 +206,10 @@
   color: var(--muted-foreground);
   margin-bottom: 1.75rem;
 }
+.hero-actions {
+  justify-content: space-between;
+  width: min(100%, 380px);
+}
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -221,11 +225,13 @@
 }
 .hero-glow {
   position: absolute;
-  inset: 0;
+  inset: -28%;
   z-index: var(--layer-decoration);
   background:
-    radial-gradient(ellipse at 50% 40%, #27e0ce25, transparent 55%),
-    radial-gradient(ellipse at 65% 70%, #7866ff20, transparent 55%);
+    radial-gradient(ellipse at 47% 42%, #27e0ce25, transparent 68%),
+    radial-gradient(ellipse at 64% 65%, #7866ff20, transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
 }
 .hero-ring {
   position: relative;

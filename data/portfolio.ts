@@ -57,6 +57,54 @@ export interface Project {
 }
 export const projects = [
   {
+    id: 'forma',
+    name: 'Forma',
+    category: 'Interfaz financiera',
+    preview: 'finance',
+    summary:
+      'Información compleja, una experiencia clara. Un concepto de dashboard pensado para entender tus finanzas de un vistazo.',
+    problem:
+      'Las cifras aisladas dificultan entender cómo se distribuyen los gastos y qué tan cerca está una meta.',
+    approach:
+      'Una jerarquía visual centrada en balance, gastos y objetivos, con componentes que se adaptan del móvil al escritorio.',
+    technologies: ['React', 'TypeScript', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
+  },
+  {
+    id: 'pulse',
+    name: 'Pulse',
+    category: 'Explorador musical',
+    preview: 'music',
+    summary:
+      'Un espacio para encontrar tu ritmo. Un concepto de interfaz musical con colecciones y navegación centrada en el estado de ánimo.',
+    problem:
+      'Encontrar una colección adecuada puede resultar abrumador cuando todas las opciones tienen la misma importancia.',
+    approach:
+      'Colecciones visuales y estados de selección claros para recorrer el contenido con teclado, ratón o pantalla táctil.',
+    technologies: ['React', 'JavaScript', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
+  },
+  {
+    id: 'margen',
+    name: 'Margen',
+    category: 'Herramienta personal',
+    preview: 'notes',
+    summary:
+      'Menos distracciones, más ideas. Un concepto de aplicación de notas con una interfaz ligera y enfocada en escribir.',
+    problem:
+      'Las herramientas cargadas de opciones pueden interrumpir el momento de capturar una idea.',
+    approach:
+      'Una superficie de escritura sencilla, organización visible y controles accesibles con el contenido como protagonista.',
+    technologies: ['JavaScript', 'HTML', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
+  },
+  {
     id: 'galeria',
     name: 'Galería',
     category: 'Operación gastronómica',
@@ -132,31 +180,6 @@ export const projects = [
     ],
   },
   {
-    id: 'rick-and-morty-multiverse',
-    name: 'Rick & Morty Multiverse',
-    category: 'Explorador de API',
-    preview: 'characters',
-    summary:
-      'Explorador de personajes con búsqueda y filtros en tiempo real, construido sobre la API pública de Rick and Morty.',
-    problem:
-      'Recorrer cientos de personajes necesita una búsqueda rápida, filtros claros y estados visuales que ayuden a encontrar información sin fricción.',
-    approach:
-      'Implementé el consumo con Fetch y async/await, búsqueda instantánea, filtros por estado, renderizado dinámico y fallbacks para imágenes.',
-    technologies: ['JavaScript', 'HTML', 'CSS', 'REST API'],
-    isConcept: false,
-    demoUrl: 'https://vladimirwxyz.github.io/API-Rick-Morty-Multiverse/',
-    sourceUrl: 'https://github.com/VladimirWxyz/API-Rick-Morty-Multiverse',
-    images: [
-      {
-        src: asset('/images/projects/rick-and-morty/overview.webp'),
-        alt: 'Aplicación Multiverso Rick y Morty con buscador, filtros y tarjetas de personajes.',
-        caption: 'Exploración y filtros de personajes',
-        width: 1500,
-        height: 647,
-      },
-    ],
-  },
-  {
     id: 'movie-catalog',
     name: 'Catálogo de Películas',
     category: 'Catálogo interactivo',
@@ -180,53 +203,5 @@ export const projects = [
         height: 647,
       },
     ],
-  },
-  {
-    id: 'forma',
-    name: 'Forma',
-    category: 'Interfaz financiera',
-    preview: 'finance',
-    summary:
-      'Información compleja, una experiencia clara. Un concepto de dashboard pensado para entender tus finanzas de un vistazo.',
-    problem:
-      'Las cifras aisladas dificultan entender cómo se distribuyen los gastos y qué tan cerca está una meta.',
-    approach:
-      'Una jerarquía visual centrada en balance, gastos y objetivos, con componentes que se adaptan del móvil al escritorio.',
-    technologies: ['React', 'TypeScript', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
-  },
-  {
-    id: 'pulse',
-    name: 'Pulse',
-    category: 'Explorador musical',
-    preview: 'music',
-    summary:
-      'Un espacio para encontrar tu ritmo. Un concepto de interfaz musical con colecciones y navegación centrada en el estado de ánimo.',
-    problem:
-      'Encontrar una colección adecuada puede resultar abrumador cuando todas las opciones tienen la misma importancia.',
-    approach:
-      'Colecciones visuales y estados de selección claros para recorrer el contenido con teclado, ratón o pantalla táctil.',
-    technologies: ['React', 'JavaScript', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
-  },
-  {
-    id: 'margen',
-    name: 'Margen',
-    category: 'Herramienta personal',
-    preview: 'notes',
-    summary:
-      'Menos distracciones, más ideas. Un concepto de aplicación de notas con una interfaz ligera y enfocada en escribir.',
-    problem:
-      'Las herramientas cargadas de opciones pueden interrumpir el momento de capturar una idea.',
-    approach:
-      'Una superficie de escritura sencilla, organización visible y controles accesibles con el contenido como protagonista.',
-    technologies: ['JavaScript', 'HTML', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
   },
 ] as const satisfies readonly Project[];

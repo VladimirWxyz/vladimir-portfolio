@@ -21,7 +21,7 @@ export function Hero() {
           <p className="hero-copy">
             Soy {profile.name}. {profile.intro}
           </p>
-          <div className="actions">
+          <div className="actions hero-actions">
             <ActionLink href="#proyectos">
               Ver proyectos <ArrowUpRight aria-hidden="true" />
             </ActionLink>
