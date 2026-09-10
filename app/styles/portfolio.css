@@ -805,9 +805,13 @@
   width: min(920px, calc(100vw - 2rem));
 }
 .dialog-close {
-  position: absolute;
+  position: sticky;
   top: 1rem;
-  right: 1rem;
+  z-index: var(--layer-content);
+  justify-self: end;
+  margin-bottom: -48px;
+  background: var(--card);
+  box-shadow: 0 8px 24px #0005;
 }
 .dialog-title {
   font-size: 2.5rem;
