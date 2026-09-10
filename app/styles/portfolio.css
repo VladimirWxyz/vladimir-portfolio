@@ -1247,7 +1247,12 @@
     max-height: 58dvh;
   }
   .gallery-footer {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gallery-counter {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
   }
   .gallery-pagination {
     grid-column: 1 / -1;
@@ -1256,6 +1261,8 @@
     order: 3;
   }
   .gallery-controls {
+    grid-column: 1;
+    grid-row: 1;
     justify-self: end;
   }
   .container {
@@ -1365,10 +1372,5 @@
   }
   .floating-note {
     font-size: 0.8rem;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }

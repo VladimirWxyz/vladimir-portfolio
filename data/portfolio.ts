@@ -17,7 +17,7 @@ export const profile: Profile = {
   name: 'Vladimir Williams',
   role: 'Frontend Developer',
   intro:
-    'Si necesitas una aplicación facil e interactiva para tu negocio, puedo ayudarte a construirla. ¡Visualiza mis proyectos!',
+    'Si necesitas una aplicación fácil e interactiva para tu negocio, puedo ayudarte a construirla. ¡Visualiza mis proyectos!',
   about:
     'Me gusta fabricar experiencias digitales agradables, como también cuido que el código sea legible, navegable y mantenible.',
   avatarUrl: asset('/images/vladimir-williams-avatar.webp'),

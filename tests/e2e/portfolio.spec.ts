@@ -171,6 +171,27 @@ test('abre la fotografía y conserva enlaces con semántica segura', async ({
   await expect(whatsapp).toHaveAttribute('rel', 'noopener noreferrer');
 });
 
+test('desplaza suavemente hacia contacto y de regreso al inicio', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+
+  const behavior = await page
+    .locator('html')
+    .evaluate((element) => getComputedStyle(element).scrollBehavior);
+  expect(behavior).toBe('smooth');
+
+  await page.getByRole('link', { name: 'Ver proyectos' }).click();
+  await expect(page).toHaveURL(/#proyectos$/);
+
+  await page.getByRole('link', { name: /Hablemos/ }).click();
+  await expect(page).toHaveURL(/#contacto$/);
+  await expect(page.getByRole('link', { name: /Volver arriba/ })).toBeVisible();
+  await page.getByRole('link', { name: /Volver arriba/ }).click();
+  await expect(page).toHaveURL(/#inicio$/);
+});
+
 test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto('/');
@@ -230,4 +251,15 @@ test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
     dialogLayout.clientWidth,
   );
   expect(dialogLayout.transitionDuration).toContain('0.24s');
+
+  const galleryBounds = await projectDialog
+    .locator('.project-gallery')
+    .boundingBox();
+  const controlsBounds = await projectDialog
+    .locator('.gallery-controls')
+    .boundingBox();
+  expect(controlsBounds?.x).toBeGreaterThanOrEqual(galleryBounds?.x ?? 0);
+  expect(
+    (controlsBounds?.x ?? 0) + (controlsBounds?.width ?? 0),
+  ).toBeLessThanOrEqual((galleryBounds?.x ?? 0) + (galleryBounds?.width ?? 0));
 });
