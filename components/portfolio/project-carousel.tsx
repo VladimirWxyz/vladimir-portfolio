@@ -195,6 +195,13 @@ export function ProjectCarousel() {
     },
     [api],
   );
+  const toggleAutoplay = useCallback(() => {
+    setInteractionPaused(false);
+    setAutoplay((current) => {
+      if (!current) api?.scrollNext(shouldJump());
+      return !current;
+    });
+  }, [api]);
   const handleWheel = useCarouselWheel(navigate);
   if (!projects.length)
     return (
@@ -235,6 +242,21 @@ export function ProjectCarousel() {
             >
               <ArrowRight aria-hidden="true" />
             </ActionButton>
+            <ActionButton
+              className="carousel-mobile-autoplay"
+              variant="outline"
+              aria-label={autoplay ? 'Pausar carrusel' : 'Reanudar carrusel'}
+              aria-pressed={autoplay}
+              disabled={!api}
+              onClick={toggleAutoplay}
+            >
+              {autoplay ? (
+                <Pause aria-hidden="true" />
+              ) : (
+                <Play aria-hidden="true" />
+              )}
+              {autoplay ? 'Pausar carrusel' : 'Reanudar carrusel'}
+            </ActionButton>
           </div>
         )
       }
@@ -247,6 +269,7 @@ export function ProjectCarousel() {
         aria-roledescription="carrusel"
         tabIndex={0}
         onWheel={handleWheel}
+        onPointerDownCapture={() => setAutoplay(false)}
         onMouseEnter={() => setInteractionPaused(true)}
         onMouseLeave={() => setInteractionPaused(false)}
         onFocusCapture={() => setInteractionPaused(true)}
@@ -319,13 +342,7 @@ export function ProjectCarousel() {
               }
               aria-pressed={autoplay}
               disabled={!api}
-              onClick={() => {
-                setInteractionPaused(false);
-                setAutoplay((current) => {
-                  if (!current) api?.scrollNext(shouldJump());
-                  return !current;
-                });
-              }}
+              onClick={toggleAutoplay}
             >
               {autoplay ? (
                 <Pause aria-hidden="true" />

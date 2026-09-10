@@ -52,6 +52,11 @@ test('acepta el gesto horizontal del trackpad sin capturar el vertical', async (
 
   await page.mouse.wheel(120, 0);
   await expect(counter).toContainText('02 / 05 — Catálogo de Películas');
+  await expect(
+    page.getByRole('button', {
+      name: 'Activar avance automático de proyectos',
+    }),
+  ).toHaveAttribute('aria-pressed', 'false');
 });
 
 test('avanza automáticamente y permite pausar los proyectos', async ({
@@ -195,11 +200,21 @@ test('desplaza suavemente hacia contacto y de regreso al inicio', async ({
 test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto('/');
-  await page
-    .getByRole('button', {
-      name: 'Pausar avance automático de proyectos',
-    })
-    .click();
+  const carousel = page.getByRole('region', {
+    name: /Proyectos seleccionados/,
+  });
+  await expect(
+    page.getByRole('button', { name: 'Pausar carrusel' }),
+  ).toBeEnabled();
+  await carousel
+    .locator('[data-slot="carousel-content"]')
+    .dispatchEvent('pointerdown', {
+      pointerType: 'touch',
+      isPrimary: true,
+    });
+  await expect(
+    page.getByRole('button', { name: 'Reanudar carrusel' }),
+  ).toHaveAttribute('aria-pressed', 'false');
 
   const dimensions = await page.evaluate(() => ({
     viewport: window.innerWidth,
