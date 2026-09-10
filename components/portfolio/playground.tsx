@@ -40,7 +40,7 @@ function ExperimentCard({
             variant="outline"
             className={`hover-demo ${active ? 'is-active' : ''}`}
             aria-pressed={active}
-            onClick={() => setActive(!active)}
+            onClick={() => setActive((current) => !current)}
           >
             {active ? 'Conectado' : 'Haz clic'}{' '}
             <ArrowUpRight aria-hidden="true" />
@@ -52,7 +52,7 @@ function ExperimentCard({
             className={`like-demo ${active ? 'is-active' : ''}`}
             aria-pressed={active}
             aria-label={active ? 'Quitar me gusta' : 'Me gusta'}
-            onClick={() => setActive(!active)}
+            onClick={() => setActive((current) => !current)}
           >
             <Heart aria-hidden="true" fill={active ? 'currentColor' : 'none'} />
             {active ? 'Te gusta' : 'Me gusta'}
@@ -69,7 +69,7 @@ function ExperimentCard({
               className="action-icon"
               aria-label="Girar figura"
               aria-pressed={active}
-              onClick={() => setActive(!active)}
+              onClick={() => setActive((current) => !current)}
             >
               <RotateCw aria-hidden="true" />
             </ActionButton>

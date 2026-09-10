@@ -1,7 +1,15 @@
 'use client';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Code2, X } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Code2,
+  Pause,
+  Play,
+  X,
+} from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -142,18 +150,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <Tag key={technology}>{technology}</Tag>
           ))}
         </div>
-        <div className="actions">
-          <ProjectDetails project={project} />
-          {project.sourceUrl && (
-            <ActionLink href={project.sourceUrl} external variant="ghost">
-              Código <Code2 aria-hidden="true" />
-            </ActionLink>
-          )}
-        </div>
         {project.isConcept && (
           <p className="project-disclaimer">
             Concepto de interfaz · Proyecto de ejemplo
           </p>
+        )}
+      </div>
+      <div className="actions project-card-actions">
+        <ProjectDetails project={project} />
+        {project.sourceUrl && (
+          <ActionLink href={project.sourceUrl} external variant="ghost">
+            Código <Code2 aria-hidden="true" />
+          </ActionLink>
         )}
       </div>
     </Surface>
@@ -162,6 +170,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export function ProjectCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const [interactionPaused, setInteractionPaused] = useState(false);
   useEffect(() => {
     if (!api) return;
     const update = () => setSelected(api.selectedScrollSnap());
@@ -172,8 +182,14 @@ export function ProjectCarousel() {
       api.off('reInit', update);
     };
   }, [api]);
+  useEffect(() => {
+    if (!api || projects.length < 2 || !autoplay || interactionPaused) return;
+    const interval = window.setInterval(() => api.scrollNext(), 5000);
+    return () => window.clearInterval(interval);
+  }, [api, autoplay, interactionPaused]);
   const navigate = useCallback(
     (direction: 'previous' | 'next') => {
+      setAutoplay(false);
       if (direction === 'previous') api?.scrollPrev(shouldJump());
       else api?.scrollNext(shouldJump());
     },
@@ -206,7 +222,7 @@ export function ProjectCarousel() {
               variant="outline"
               aria-label="Proyecto anterior"
               disabled={!api}
-              onClick={() => api?.scrollPrev(shouldJump())}
+              onClick={() => navigate('previous')}
             >
               <ArrowLeft aria-hidden="true" />
             </ActionButton>
@@ -215,7 +231,7 @@ export function ProjectCarousel() {
               variant="outline"
               aria-label="Proyecto siguiente"
               disabled={!api}
-              onClick={() => api?.scrollNext(shouldJump())}
+              onClick={() => navigate('next')}
             >
               <ArrowRight aria-hidden="true" />
             </ActionButton>
@@ -231,6 +247,14 @@ export function ProjectCarousel() {
         aria-roledescription="carrusel"
         tabIndex={0}
         onWheel={handleWheel}
+        onMouseEnter={() => setInteractionPaused(true)}
+        onMouseLeave={() => setInteractionPaused(false)}
+        onFocusCapture={() => setInteractionPaused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setInteractionPaused(false);
+          }
+        }}
         onKeyDownCapture={(event) => {
           // Dialog portals bubble through React: never consume their keys.
           if (event.target !== event.currentTarget) return;
@@ -272,15 +296,44 @@ export function ProjectCarousel() {
                 aria-label={`Ver ${project.name}`}
                 aria-pressed={index === selected}
                 disabled={!api}
-                onClick={() => api?.scrollTo(index, shouldJump())}
+                onClick={() => {
+                  setAutoplay(false);
+                  api?.scrollTo(index, shouldJump());
+                }}
               >
                 <span />
               </button>
             ))}
           </fieldset>
-          <span className="swipe-hint">
-            Arrastra para explorar <ArrowRight size={14} aria-hidden="true" />
-          </span>
+          <div className="carousel-auxiliary">
+            <span className="swipe-hint">
+              Arrastra para explorar <ArrowRight size={14} aria-hidden="true" />
+            </span>
+            <ActionButton
+              className="action-icon carousel-autoplay"
+              variant="outline"
+              aria-label={
+                autoplay
+                  ? 'Pausar avance automático de proyectos'
+                  : 'Activar avance automático de proyectos'
+              }
+              aria-pressed={autoplay}
+              disabled={!api}
+              onClick={() => {
+                setInteractionPaused(false);
+                setAutoplay((current) => {
+                  if (!current) api?.scrollNext(shouldJump());
+                  return !current;
+                });
+              }}
+            >
+              {autoplay ? (
+                <Pause aria-hidden="true" />
+              ) : (
+                <Play aria-hidden="true" />
+              )}
+            </ActionButton>
+          </div>
         </div>
       )}
     </Section>
