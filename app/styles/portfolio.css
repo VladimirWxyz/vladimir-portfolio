@@ -239,6 +239,7 @@
   aspect-ratio: 1;
   border-radius: 60px;
   transform: rotate(-23deg);
+  animation: hero-ring-spin 14s linear infinite;
   background: linear-gradient(135deg, #66f8e4, #25b5c7 42%, #6e61f2 90%);
   box-shadow:
     inset 3px 3px 4px #ffffff55,
@@ -253,13 +254,21 @@
   background: var(--background);
   box-shadow: inset 10px 12px 15px #0008;
 }
+.hero-orbit {
+  position: absolute;
+  width: 280px;
+  aspect-ratio: 1;
+  animation: hero-orbit-spin 8s linear infinite reverse;
+  pointer-events: none;
+}
 .hero-orb {
   position: absolute;
   width: 112px;
   aspect-ratio: 1;
   border-radius: 50%;
-  left: 115px;
-  top: 124px;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
   background: radial-gradient(
     circle at 30% 20%,
     #f0ffff,
@@ -268,6 +277,16 @@
     #114159
   );
   box-shadow: 9px 18px 24px #0006;
+}
+@keyframes hero-ring-spin {
+  to {
+    transform: rotate(337deg);
+  }
+}
+@keyframes hero-orbit-spin {
+  to {
+    transform: rotate(1turn);
+  }
 }
 .floating-note {
   position: absolute;
@@ -1207,10 +1226,12 @@
     inset: 32px;
     border-radius: 24px;
   }
+  .hero-orbit {
+    width: 245px;
+  }
   .hero-orb {
     width: 95px;
-    top: 100px;
-    left: 100px;
+    right: -10px;
   }
   .stack-strip .eyebrow {
     flex-basis: 100%;

@@ -16,9 +16,10 @@ export interface Profile {
 export const profile: Profile = {
   name: 'Vladimir Williams',
   role: 'Frontend Developer',
-  intro: 'Creo interfaces con React, JavaScript y atención a cada interacción.',
+  intro:
+    'Si necesitas una aplicación facil e interactiva para tu negocio, puedo ayudarte a construirla. ¡Visualiza mis proyectos!',
   about:
-    'Me gusta convertir una idea visual en algo que puedas tocar, recorrer y usar. Mi terreno es el frontend: estructura, estilo e interacción.',
+    'Me gusta fabricar experiencias digitales agradables, como también cuido que el código sea legible, navegable y mantenible.',
   avatarUrl: asset('/images/vladimir-williams-avatar.webp'),
   email: 'vladimirwilliams.xyz@gmail.com',
   github: 'https://github.com/VladimirWxyz',
@@ -56,54 +57,6 @@ export interface Project {
   readonly images?: readonly ProjectImage[];
 }
 export const projects = [
-  {
-    id: 'forma',
-    name: 'Forma',
-    category: 'Interfaz financiera',
-    preview: 'finance',
-    summary:
-      'Información compleja, una experiencia clara. Un concepto de dashboard pensado para entender tus finanzas de un vistazo.',
-    problem:
-      'Las cifras aisladas dificultan entender cómo se distribuyen los gastos y qué tan cerca está una meta.',
-    approach:
-      'Una jerarquía visual centrada en balance, gastos y objetivos, con componentes que se adaptan del móvil al escritorio.',
-    technologies: ['React', 'TypeScript', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
-  },
-  {
-    id: 'pulse',
-    name: 'Pulse',
-    category: 'Explorador musical',
-    preview: 'music',
-    summary:
-      'Un espacio para encontrar tu ritmo. Un concepto de interfaz musical con colecciones y navegación centrada en el estado de ánimo.',
-    problem:
-      'Encontrar una colección adecuada puede resultar abrumador cuando todas las opciones tienen la misma importancia.',
-    approach:
-      'Colecciones visuales y estados de selección claros para recorrer el contenido con teclado, ratón o pantalla táctil.',
-    technologies: ['React', 'JavaScript', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
-  },
-  {
-    id: 'margen',
-    name: 'Margen',
-    category: 'Herramienta personal',
-    preview: 'notes',
-    summary:
-      'Menos distracciones, más ideas. Un concepto de aplicación de notas con una interfaz ligera y enfocada en escribir.',
-    problem:
-      'Las herramientas cargadas de opciones pueden interrumpir el momento de capturar una idea.',
-    approach:
-      'Una superficie de escritura sencilla, organización visible y controles accesibles con el contenido como protagonista.',
-    technologies: ['JavaScript', 'HTML', 'CSS'],
-    isConcept: true,
-    demoUrl: null,
-    sourceUrl: null,
-  },
   {
     id: 'galeria',
     name: 'Galería',
@@ -203,5 +156,53 @@ export const projects = [
         height: 647,
       },
     ],
+  },
+  {
+    id: 'forma',
+    name: 'Forma',
+    category: 'Interfaz financiera',
+    preview: 'finance',
+    summary:
+      'Información compleja, una experiencia clara. Un concepto de dashboard pensado para entender tus finanzas de un vistazo.',
+    problem:
+      'Las cifras aisladas dificultan entender cómo se distribuyen los gastos y qué tan cerca está una meta.',
+    approach:
+      'Una jerarquía visual centrada en balance, gastos y objetivos, con componentes que se adaptan del móvil al escritorio.',
+    technologies: ['React', 'TypeScript', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
+  },
+  {
+    id: 'pulse',
+    name: 'Pulse',
+    category: 'Explorador musical',
+    preview: 'music',
+    summary:
+      'Un espacio para encontrar tu ritmo. Un concepto de interfaz musical con colecciones y navegación centrada en el estado de ánimo.',
+    problem:
+      'Encontrar una colección adecuada puede resultar abrumador cuando todas las opciones tienen la misma importancia.',
+    approach:
+      'Colecciones visuales y estados de selección claros para recorrer el contenido con teclado, ratón o pantalla táctil.',
+    technologies: ['React', 'JavaScript', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
+  },
+  {
+    id: 'margen',
+    name: 'Margen',
+    category: 'Herramienta personal',
+    preview: 'notes',
+    summary:
+      'Menos distracciones, más ideas. Un concepto de aplicación de notas con una interfaz ligera y enfocada en escribir.',
+    problem:
+      'Las herramientas cargadas de opciones pueden interrumpir el momento de capturar una idea.',
+    approach:
+      'Una superficie de escritura sencilla, organización visible y controles accesibles con el contenido como protagonista.',
+    technologies: ['JavaScript', 'HTML', 'CSS'],
+    isConcept: true,
+    demoUrl: null,
+    sourceUrl: null,
   },
 ] as const satisfies readonly Project[];

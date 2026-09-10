@@ -12,11 +12,11 @@ export function Hero() {
             {profile.role}
           </p>
           <h1 id="hero-title">
-            Se ve bien.
+            Hola!
             <br />
-            Se siente mejor.
+            Bienvenido a
             <br />
-            <span className="gradient-text">Lo construyo.</span>
+            <span className="gradient-text">Mi portafolio.</span>
           </h1>
           <p className="hero-copy">
             Soy {profile.name}. {profile.intro}
@@ -32,7 +32,8 @@ export function Hero() {
         </div>
         <div className="hero-visual" aria-hidden="true">
           <div className="hero-glow" />
-          <div className="hero-ring">
+          <div className="hero-ring" />
+          <div className="hero-orbit">
             <div className="hero-orb" />
           </div>
           <div className="floating-note note-top">

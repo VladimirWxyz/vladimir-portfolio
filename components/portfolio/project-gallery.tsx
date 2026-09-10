@@ -38,8 +38,6 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
   const reducedMotion = useSyncExternalStore(
     subscribeToReducedMotion,
     getReducedMotionPreference,
@@ -59,18 +57,10 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
   }, [api]);
 
   useEffect(() => {
-    if (
-      !api ||
-      !hasMultipleImages ||
-      !autoplay ||
-      hovered ||
-      focused ||
-      reducedMotion
-    )
-      return;
-    const interval = window.setInterval(() => api.scrollNext(), 6500);
+    if (!api || !hasMultipleImages || !autoplay || reducedMotion) return;
+    const interval = window.setInterval(() => api.scrollNext(), 4000);
     return () => window.clearInterval(interval);
-  }, [api, autoplay, focused, hasMultipleImages, hovered, reducedMotion]);
+  }, [api, autoplay, hasMultipleImages, reducedMotion]);
 
   const navigate = useCallback(
     (direction: 'previous' | 'next') => {
@@ -85,16 +75,7 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
   if (!images.length) return null;
 
   return (
-    <div
-      className="project-gallery"
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setFocused(false);
-      }}
-    >
+    <div className="project-gallery">
       <Carousel
         setApi={setApi}
         opts={{ loop: true, align: 'start' }}
@@ -181,7 +162,12 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
               }
               aria-pressed={!reducedMotion && autoplay}
               disabled={reducedMotion}
-              onClick={() => setAutoplay((current) => !current)}
+              onClick={() =>
+                setAutoplay((current) => {
+                  if (!current) api?.scrollNext(reducedMotion);
+                  return !current;
+                })
+              }
             >
               {autoplay ? (
                 <Pause aria-hidden="true" />

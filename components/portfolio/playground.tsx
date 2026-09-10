@@ -89,8 +89,8 @@ export function Playground() {
     <Section
       id="laboratorio"
       eyebrow="02 / Playground"
-      title="Pequeñas cosas. Mucho detalle."
-      description="Un espacio para probar, jugar y cuidar cómo se siente una interfaz."
+      title="¿Quieres probar interacciones?"
+      description="Este es un espacio para ver microinteracciones, estados y animaciones."
     >
       <div className="experiment-grid">
         {experiments.map((experiment) => (

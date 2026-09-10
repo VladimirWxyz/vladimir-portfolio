@@ -25,14 +25,14 @@ export function About() {
     <Section
       id="sobre-mi"
       eyebrow="03 / Detrás del código"
-      title="Pienso en componentes. Cuido la experiencia."
+      title="Pienso en la experiencia y, construyo el código."
     >
       <div className="about-grid">
         <div className="about-copy">
           <p>{profile.about}</p>
           <p>
-            Me interesa cómo se ve una idea, cómo se usa y cómo se construye.
-            Disfruto conectar esas tres partes.
+            Visualizo cómo se ve una idea, cómo podría usarla, y cómo se
+            construye. Disfruto conectar esas tres partes.
           </p>
         </div>
         <div className="approach-list">

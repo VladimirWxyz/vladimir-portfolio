@@ -195,9 +195,9 @@ export function ProjectCarousel() {
   return (
     <Section
       id="proyectos"
-      eyebrow="01 / Proyectos seleccionados"
-      title="Hecho para interactuar."
-      description="Una mirada a las interfaces que me gusta construir."
+      eyebrow="01 / Mis Proyectos"
+      title="Una muestra de lo que he construido."
+      description="Explora las experiencias digitales que he diseñado y que puedo realizar para ti."
       actions={
         projects.length > 1 && (
           <div className="carousel-arrows">
