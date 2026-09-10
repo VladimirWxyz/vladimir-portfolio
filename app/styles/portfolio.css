@@ -403,6 +403,9 @@
 .carousel-mobile-autoplay {
   display: none;
 }
+.carousel-edge-next {
+  display: none;
+}
 .projects-carousel,
 .projects-carousel [data-slot='carousel-content'],
 .gallery-carousel [data-slot='carousel-content'] {
@@ -1169,6 +1172,23 @@
   .carousel-auxiliary {
     display: none;
   }
+  .carousel-edge-next {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    z-index: var(--layer-content);
+    display: grid;
+    width: 44px;
+    min-height: 44px;
+    border-color: #79efe0aa;
+    background: #071b26dd;
+    box-shadow: 0 10px 26px #0008;
+    transform: translateY(-50%);
+    backdrop-filter: blur(10px);
+  }
+  .carousel-edge-next svg {
+    animation: carousel-edge-hint 1.8s ease-in-out infinite;
+  }
   .project-card {
     grid-template-columns: 1fr;
     padding: 0.85rem;
@@ -1321,6 +1341,15 @@
   .stack-strip .eyebrow {
     flex-basis: 100%;
     margin-bottom: 0.5rem;
+  }
+}
+@keyframes carousel-edge-hint {
+  0%,
+  100% {
+    translate: 0;
+  }
+  50% {
+    translate: 4px;
   }
 }
 @media (max-width: 400px) {

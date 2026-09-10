@@ -300,6 +300,15 @@ export function ProjectCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <ActionButton
+          className="action-icon carousel-edge-next"
+          variant="outline"
+          aria-label="Deslizar al proyecto siguiente"
+          disabled={!api}
+          onClick={() => navigate('next')}
+        >
+          <ArrowRight aria-hidden="true" />
+        </ActionButton>
       </Carousel>
       {projects.length > 1 && (
         <div className="carousel-footer">

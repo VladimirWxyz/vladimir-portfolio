@@ -215,6 +215,18 @@ test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
   await expect(
     page.getByRole('button', { name: 'Reanudar carrusel' }),
   ).toHaveAttribute('aria-pressed', 'false');
+  const edgeNext = page.getByRole('button', {
+    name: 'Deslizar al proyecto siguiente',
+  });
+  await expect(edgeNext).toBeVisible();
+  await edgeNext.click();
+  await expect(page.locator('.carousel-counter')).toContainText(
+    '02 / 05 — Catálogo de Películas',
+  );
+  await expect(
+    page.getByRole('button', { name: 'Reanudar carrusel' }),
+  ).toHaveAttribute('aria-pressed', 'false');
+  await page.getByRole('button', { name: 'Ver Galería' }).click();
 
   const dimensions = await page.evaluate(() => ({
     viewport: window.innerWidth,
