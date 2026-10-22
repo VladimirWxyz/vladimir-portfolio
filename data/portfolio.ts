@@ -58,6 +58,72 @@ export interface Project {
 }
 export const projects = [
   {
+    id: 'pizzas-house',
+    name: 'Pizzas House',
+    category: 'Pedidos y delivery',
+    preview: 'notes',
+    summary:
+      'Experiencia móvil de pedidos para una pizzería, con catálogo por tamaños, promociones, selección de sede y delivery calculado mediante geolocalización.',
+    problem:
+      'La variedad de tamaños, ingredientes, promociones y modalidades de entrega hacía necesario convertir una carta extensa en un proceso de compra rápido y fácil de entender desde el teléfono.',
+    approach:
+      'Diseñé una navegación mobile-first que guía desde la elección de la pizza hasta el envío del pedido, integrando personalización, sedes, ubicación manual o por GPS, mapa interactivo y cálculo estimado del delivery.',
+    technologies: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'MapLibre',
+    ],
+    isConcept: false,
+    demoUrl: 'https://pizzashousepzo.com',
+    sourceUrl: null,
+    images: [
+      {
+        src: asset('/images/projects/pizzas-house/00-home.webp'),
+        alt: 'Portada móvil de Pizzas House con accesos al menú, promociones y pedidos por WhatsApp.',
+        caption: 'Inicio y accesos principales',
+        width: 568,
+        height: 1200,
+      },
+      {
+        src: asset('/images/projects/pizzas-house/01-menu.webp'),
+        alt: 'Carta móvil de Pizzas House con selector de tamaños, categorías y tipos de pizza.',
+        caption: 'Carta y filtros del menú',
+        width: 568,
+        height: 1200,
+      },
+      {
+        src: asset('/images/projects/pizzas-house/02-catalog.webp'),
+        alt: 'Catálogo móvil de pizzas con fotografías, ingredientes, precios y botones para añadir al pedido.',
+        caption: 'Catálogo de pizzas',
+        width: 568,
+        height: 1200,
+      },
+      {
+        src: asset('/images/projects/pizzas-house/03-sizes.webp'),
+        alt: 'Guía móvil de tamaños de pizza desde pequeña de 28 centímetros hasta Monster XL de 80 centímetros.',
+        caption: 'Guía de tamaños',
+        width: 568,
+        height: 1200,
+      },
+      {
+        src: asset('/images/projects/pizzas-house/04-order-gps.webp'),
+        alt: 'Flujo móvil de pedido con modalidad delivery, selección de sede y ubicación mediante GPS o entrada manual.',
+        caption: 'Pedido, sedes y geolocalización',
+        width: 568,
+        height: 1200,
+      },
+      {
+        src: asset('/images/projects/pizzas-house/05-map.webp'),
+        alt: 'Mapa móvil de Puerto Ordaz para confirmar el punto exacto de entrega mediante un marcador.',
+        caption: 'Ubicación precisa en el mapa',
+        width: 634,
+        height: 1257,
+      },
+    ],
+  },
+  {
     id: 'galeria',
     name: 'Galería',
     category: 'Operación gastronómica',

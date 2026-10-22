@@ -9,14 +9,16 @@ test('navega el carrusel y mantiene aislado el teclado del diálogo', async ({
     name: /Proyectos seleccionados/,
   });
   const counter = page.locator('.carousel-counter');
-  await expect(counter).toContainText('01 / 05 — Galería');
+  await expect(counter).toContainText('01 / 06 — Pizzas House');
 
   await page.getByRole('button', { name: 'Proyecto siguiente' }).click();
-  await expect(counter).toContainText('02 / 05 — Catálogo de Películas');
+  await expect(counter).toContainText('02 / 06 — Galería');
 
   await carousel.focus();
   await carousel.press('ArrowRight');
-  await expect(counter).toContainText('03 / 05 — Forma');
+  await expect(counter).toContainText('03 / 06 — Catálogo de Películas');
+  await carousel.press('ArrowRight');
+  await expect(counter).toContainText('04 / 06 — Forma');
 
   const trigger = page.getByRole('button', { name: /Ver proyecto/ });
   await trigger.click();
@@ -26,7 +28,7 @@ test('navega el carrusel y mantiene aislado el teclado del diálogo', async ({
   const close = dialog.getByRole('button', { name: 'Cerrar proyecto' });
   await close.focus();
   await close.press('ArrowRight');
-  await expect(counter).toContainText('03 / 05 — Forma');
+  await expect(counter).toContainText('04 / 06 — Forma');
 
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
@@ -48,10 +50,10 @@ test('acepta el gesto horizontal del trackpad sin capturar el vertical', async (
   await carousel.hover();
 
   await page.mouse.wheel(0, 180);
-  await expect(counter).toContainText('01 / 05 — Galería');
+  await expect(counter).toContainText('01 / 06 — Pizzas House');
 
   await page.mouse.wheel(120, 0);
-  await expect(counter).toContainText('02 / 05 — Catálogo de Películas');
+  await expect(counter).toContainText('02 / 06 — Galería');
   await expect(
     page.getByRole('button', {
       name: 'Activar avance automático de proyectos',
@@ -68,10 +70,10 @@ test('avanza automáticamente y permite pausar los proyectos', async ({
   const pause = page.getByRole('button', {
     name: 'Pausar avance automático de proyectos',
   });
-  await expect(counter).toContainText('01 / 05 — Galería');
+  await expect(counter).toContainText('01 / 06 — Pizzas House');
   await expect(pause).toHaveAttribute('aria-pressed', 'true');
-  await expect(counter).toContainText('02 / 05 — Catálogo de Películas', {
-    timeout: 7000,
+  await expect(counter).toContainText('02 / 06 — Galería', {
+    timeout: 12_000,
   });
 
   await pause.click();
@@ -87,7 +89,7 @@ test('distingue el proyecto real de los conceptos', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Ver Catálogo de Películas' }).click();
   const realProject = page.getByRole('article', {
-    name: '2 de 5: Catálogo de Películas',
+    name: '3 de 6: Catálogo de Películas',
   });
   await expect(realProject).toBeVisible();
   await expect(realProject).not.toContainText('Proyecto de ejemplo');
@@ -101,7 +103,7 @@ test('distingue el proyecto real de los conceptos', async ({ page }) => {
   const next = page.getByRole('button', { name: 'Proyecto siguiente' });
   await expect(next).toBeEnabled();
   await page.getByRole('button', { name: 'Ver Forma' }).click();
-  const concept = page.getByRole('article', { name: '3 de 5: Forma' });
+  const concept = page.getByRole('article', { name: '4 de 6: Forma' });
   await expect(concept).toContainText(
     'Concepto de interfaz · Proyecto de ejemplo',
   );
@@ -114,7 +116,7 @@ test('recorre las vistas reales del proyecto Galería', async ({ page }) => {
     page.getByRole('button', { name: 'Proyecto siguiente' }),
   ).toBeEnabled();
 
-  const project = page.getByRole('article', { name: '1 de 5: Galería' });
+  const project = page.getByRole('article', { name: '2 de 6: Galería' });
   await expect(
     project.getByRole('img', {
       name: /Vista administrativa de la cafetería/,
@@ -135,7 +137,7 @@ test('recorre las vistas reales del proyecto Galería', async ({ page }) => {
   await page.mouse.wheel(120, 0);
   await expect(dialog.locator('.gallery-counter')).toContainText('02 / 11');
   await expect(page.locator('.carousel-counter')).toContainText(
-    '01 / 05 — Galería',
+    '02 / 06 — Galería',
   );
   await expect(
     dialog.getByRole('img', {
@@ -221,7 +223,7 @@ test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
   await expect(edgeNext).toBeVisible();
   await edgeNext.click();
   await expect(page.locator('.carousel-counter')).toContainText(
-    '02 / 05 — Catálogo de Películas',
+    '02 / 06 — Galería',
   );
   await expect(
     page.getByRole('button', { name: 'Reanudar carrusel' }),
@@ -236,7 +238,7 @@ test('no desborda horizontalmente en un móvil pequeño', async ({ page }) => {
   await expect(page.getByRole('link', { name: /Hablemos/ })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
-  const project = page.getByRole('article', { name: '1 de 5: Galería' });
+  const project = page.getByRole('article', { name: '2 de 6: Galería' });
   const copy = await project.locator('.project-copy').boundingBox();
   const image = await project.locator('.project-photo').boundingBox();
   const actions = await project.locator('.project-card-actions').boundingBox();
