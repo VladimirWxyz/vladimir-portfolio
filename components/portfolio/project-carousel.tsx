@@ -1,4 +1,6 @@
 'use client';
+import { useLanguage, usePortfolio } from './language-provider';
+
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import {
@@ -24,7 +26,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { projects, type Project } from '@/data/portfolio';
+import type { Project } from '@/data/portfolio';
 import { ActionButton } from './action-button';
 import { ActionLink } from './action-link';
 import { Section, Surface, Tag } from './layout';
@@ -62,10 +64,12 @@ function ProjectCover({
 }
 
 function ProjectDetails({ project }: { project: Project }) {
+  const { t } = useLanguage();
+
   return (
     <Dialog>
       <DialogTrigger render={<ActionButton />}>
-        Ver proyecto <ArrowUpRight aria-hidden="true" />
+        {t('Ver proyecto')} <ArrowUpRight aria-hidden="true" />
       </DialogTrigger>
       <DialogContent
         className={`project-dialog${project.images ? ' project-dialog-gallery' : ''}`}
@@ -76,14 +80,14 @@ function ProjectDetails({ project }: { project: Project }) {
             <ActionButton
               variant="outline"
               className="action-icon dialog-close"
-              aria-label="Cerrar proyecto"
+              aria-label={t('Cerrar proyecto')}
             />
           }
         >
           <X aria-hidden="true" />
         </DialogClose>
         <p className="eyebrow">
-          {project.isConcept ? 'Concepto de interfaz' : project.category}
+          {project.isConcept ? t('Concepto de interfaz') : project.category}
         </p>
         <DialogTitle className="dialog-title">{project.name}</DialogTitle>
         <DialogDescription className="dialog-description">
@@ -98,9 +102,9 @@ function ProjectDetails({ project }: { project: Project }) {
           <ProjectPreview project={project} />
         )}
         <div className="project-detail-copy">
-          <h3>El problema</h3>
+          <h3>{t('El problema')}</h3>
           <p>{project.problem}</p>
-          <h3>El enfoque</h3>
+          <h3>{t('El enfoque')}</h3>
           <p>{project.approach}</p>
         </div>
         <div className="project-tags">
@@ -112,20 +116,21 @@ function ProjectDetails({ project }: { project: Project }) {
           <div className="actions">
             {project.demoUrl && (
               <ActionLink href={project.demoUrl} external>
-                Ver demo <ArrowUpRight aria-hidden="true" />
+                {t('Ver demo')} <ArrowUpRight aria-hidden="true" />
               </ActionLink>
             )}
             {project.sourceUrl && (
               <ActionLink href={project.sourceUrl} variant="outline" external>
-                Código <Code2 aria-hidden="true" />
+                {t('Código')} <Code2 aria-hidden="true" />
               </ActionLink>
             )}
           </div>
         )}
         {project.isConcept && (
           <p className="project-disclaimer">
-            Exploración visual de ejemplo; no representa un trabajo para un
-            cliente.
+            {t(
+              'Exploración visual de ejemplo; no representa un trabajo para un cliente.',
+            )}
           </p>
         )}
       </DialogContent>
@@ -133,6 +138,8 @@ function ProjectDetails({ project }: { project: Project }) {
   );
 }
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { t } = useLanguage();
+
   return (
     <Surface className="project-card">
       <ProjectCover project={project} priority={index === 0} />
@@ -152,7 +159,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
         {project.isConcept && (
           <p className="project-disclaimer">
-            Concepto de interfaz · Proyecto de ejemplo
+            {t('Concepto de interfaz · Proyecto de ejemplo')}
           </p>
         )}
       </div>
@@ -160,7 +167,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <ProjectDetails project={project} />
         {project.sourceUrl && (
           <ActionLink href={project.sourceUrl} external variant="ghost">
-            Código <Code2 aria-hidden="true" />
+            {t('Código')} <Code2 aria-hidden="true" />
           </ActionLink>
         )}
       </div>
@@ -168,6 +175,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 export function ProjectCarousel() {
+  const { projects } = usePortfolio();
+  const { t } = useLanguage();
+
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -186,7 +196,7 @@ export function ProjectCarousel() {
     if (!api || projects.length < 2 || !autoplay || interactionPaused) return;
     const interval = window.setInterval(() => api.scrollNext(), 5000);
     return () => window.clearInterval(interval);
-  }, [api, autoplay, interactionPaused]);
+  }, [api, autoplay, interactionPaused, projects.length]);
   const navigate = useCallback(
     (direction: 'previous' | 'next') => {
       setAutoplay(false);
@@ -207,27 +217,29 @@ export function ProjectCarousel() {
     return (
       <Section
         id="proyectos"
-        eyebrow="01 / Proyectos"
-        title="Lo próximo está en construcción."
+        eyebrow={t('01 / Proyectos')}
+        title={t('Lo próximo está en construcción.')}
       >
         <p className="section-description">
-          Pronto compartiré nuevos proyectos aquí.
+          {t('Pronto compartiré nuevos proyectos aquí.')}
         </p>
       </Section>
     );
   return (
     <Section
       id="proyectos"
-      eyebrow="01 / Mis Proyectos"
-      title="Una muestra de lo que he construido."
-      description="Explora las experiencias digitales que he diseñado y que puedo realizar para ti."
+      eyebrow={t('01 / Mis Proyectos')}
+      title={t('Una muestra de lo que he construido.')}
+      description={t(
+        'Explora las experiencias digitales que he diseñado y que puedo realizar para ti.',
+      )}
       actions={
         projects.length > 1 && (
           <div className="carousel-arrows">
             <ActionButton
               className="action-icon"
               variant="outline"
-              aria-label="Proyecto anterior"
+              aria-label={t('Proyecto anterior')}
               disabled={!api}
               onClick={() => navigate('previous')}
             >
@@ -236,7 +248,7 @@ export function ProjectCarousel() {
             <ActionButton
               className="action-icon"
               variant="outline"
-              aria-label="Proyecto siguiente"
+              aria-label={t('Proyecto siguiente')}
               disabled={!api}
               onClick={() => navigate('next')}
             >
@@ -245,7 +257,9 @@ export function ProjectCarousel() {
             <ActionButton
               className="carousel-mobile-autoplay"
               variant="outline"
-              aria-label={autoplay ? 'Pausar carrusel' : 'Reanudar carrusel'}
+              aria-label={
+                autoplay ? t('Pausar carrusel') : t('Reanudar carrusel')
+              }
               aria-pressed={autoplay}
               disabled={!api}
               onClick={toggleAutoplay}
@@ -255,7 +269,7 @@ export function ProjectCarousel() {
               ) : (
                 <Play aria-hidden="true" />
               )}
-              {autoplay ? 'Pausar carrusel' : 'Reanudar carrusel'}
+              {autoplay ? t('Pausar carrusel') : t('Reanudar carrusel')}
             </ActionButton>
           </div>
         )
@@ -265,8 +279,10 @@ export function ProjectCarousel() {
         setApi={setApi}
         opts={{ loop: true, align: 'start' }}
         className="projects-carousel"
-        aria-label="Proyectos seleccionados. Usa las flechas izquierda y derecha para navegar."
-        aria-roledescription="carrusel"
+        aria-label={t(
+          'Proyectos seleccionados. Usa las flechas izquierda y derecha para navegar.',
+        )}
+        aria-roledescription={t('carrusel')}
         tabIndex={0}
         onWheel={handleWheel}
         onPointerDownCapture={() => setAutoplay(false)}
@@ -291,8 +307,8 @@ export function ProjectCarousel() {
           {projects.map((project, index) => (
             <CarouselItem
               key={project.id}
-              aria-label={`${index + 1} de ${projects.length}: ${project.name}`}
-              aria-roledescription="diapositiva"
+              aria-label={`${index + 1} ${t('de')} ${projects.length}: ${project.name}`}
+              aria-roledescription={t('diapositiva')}
               inert={index !== selected}
               aria-hidden={index !== selected}
             >
@@ -303,7 +319,7 @@ export function ProjectCarousel() {
         <ActionButton
           className="action-icon carousel-edge-next"
           variant="outline"
-          aria-label="Deslizar al proyecto siguiente"
+          aria-label={t('Deslizar al proyecto siguiente')}
           disabled={!api}
           onClick={() => navigate('next')}
         >
@@ -320,12 +336,12 @@ export function ProjectCarousel() {
             </span>
           </p>
           <fieldset className="carousel-pagination">
-            <legend className="sr-only">Elegir proyecto</legend>
+            <legend className="sr-only">{t('Elegir proyecto')}</legend>
             {projects.map((project, index) => (
               <button
                 key={project.id}
                 type="button"
-                aria-label={`Ver ${project.name}`}
+                aria-label={`${t('Ver')} ${project.name}`}
                 aria-pressed={index === selected}
                 disabled={!api}
                 onClick={() => {
@@ -339,15 +355,16 @@ export function ProjectCarousel() {
           </fieldset>
           <div className="carousel-auxiliary">
             <span className="swipe-hint">
-              Arrastra para explorar <ArrowRight size={14} aria-hidden="true" />
+              {t('Arrastra para explorar')}{' '}
+              <ArrowRight size={14} aria-hidden="true" />
             </span>
             <ActionButton
               className="action-icon carousel-autoplay"
               variant="outline"
               aria-label={
                 autoplay
-                  ? 'Pausar avance automático de proyectos'
-                  : 'Activar avance automático de proyectos'
+                  ? t('Pausar avance automático de proyectos')
+                  : t('Activar avance automático de proyectos')
               }
               aria-pressed={autoplay}
               disabled={!api}

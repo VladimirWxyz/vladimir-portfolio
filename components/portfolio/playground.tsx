@@ -1,4 +1,6 @@
 'use client';
+import { useLanguage } from './language-provider';
+
 import { useState } from 'react';
 import { ArrowUpRight, Heart, RotateCw } from 'lucide-react';
 import { ActionButton } from './action-button';
@@ -31,6 +33,8 @@ function ExperimentCard({
 }: {
   experiment: (typeof experiments)[number];
 }) {
+  const { t } = useLanguage();
+
   const [active, setActive] = useState(false);
   return (
     <Surface className={`experiment experiment-${experiment.kind}`}>
@@ -42,7 +46,7 @@ function ExperimentCard({
             aria-pressed={active}
             onClick={() => setActive((current) => !current)}
           >
-            {active ? 'Conectado' : 'Haz clic'}{' '}
+            {active ? t('Conectado') : t('Haz clic')}{' '}
             <ArrowUpRight aria-hidden="true" />
           </ActionButton>
         )}
@@ -51,11 +55,11 @@ function ExperimentCard({
             variant="outline"
             className={`like-demo ${active ? 'is-active' : ''}`}
             aria-pressed={active}
-            aria-label={active ? 'Quitar me gusta' : 'Me gusta'}
+            aria-label={active ? t('Quitar me gusta') : t('Me gusta')}
             onClick={() => setActive((current) => !current)}
           >
             <Heart aria-hidden="true" fill={active ? 'currentColor' : 'none'} />
-            {active ? 'Te gusta' : 'Me gusta'}
+            {active ? t('Te gusta') : t('Me gusta')}
           </ActionButton>
         )}
         {experiment.kind === 'motion' && (
@@ -67,7 +71,7 @@ function ExperimentCard({
             <ActionButton
               variant="ghost"
               className="action-icon"
-              aria-label="Girar figura"
+              aria-label={t('Girar figura')}
               aria-pressed={active}
               onClick={() => setActive((current) => !current)}
             >
@@ -77,20 +81,24 @@ function ExperimentCard({
         )}
       </div>
       <div className="experiment-copy">
-        <p className="eyebrow">{experiment.label}</p>
-        <h3>{experiment.title}</h3>
-        <p>{experiment.copy}</p>
+        <p className="eyebrow">{t(experiment.label)}</p>
+        <h3>{t(experiment.title)}</h3>
+        <p>{t(experiment.copy)}</p>
       </div>
     </Surface>
   );
 }
 export function Playground() {
+  const { t } = useLanguage();
+
   return (
     <Section
       id="laboratorio"
       eyebrow="02 / Playground"
-      title="¿Quieres probar interacciones?"
-      description="Este es un espacio para ver microinteracciones, estados y animaciones."
+      title={t('¿Quieres probar interacciones?')}
+      description={t(
+        'Este es un espacio para ver microinteracciones, estados y animaciones.',
+      )}
     >
       <div className="experiment-grid">
         {experiments.map((experiment) => (

@@ -1,8 +1,14 @@
+'use client';
+import { useLanguage, usePortfolio } from './language-provider';
+
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { profile, technologies } from '@/data/portfolio';
+import { technologies } from '@/data/portfolio';
 import { ActionLink } from './action-link';
 import { Tag } from './layout';
 export function Hero() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   return (
     <div className="container">
       <section className="hero" aria-labelledby="hero-title">
@@ -12,21 +18,21 @@ export function Hero() {
             {profile.role}
           </p>
           <h1 id="hero-title">
-            Hola!
+            {t('Hola!')}
             <br />
-            Bienvenido a
+            {t('Bienvenido a')}
             <br />
-            <span className="gradient-text">Mi portafolio.</span>
+            <span className="gradient-text">{t('Mi portafolio.')}</span>
           </h1>
           <p className="hero-copy">
-            Soy {profile.name}. {profile.intro}
+            {t('Soy')} {profile.name}. {profile.intro}
           </p>
           <div className="actions hero-actions">
             <ActionLink href="#proyectos">
-              Ver proyectos <ArrowUpRight aria-hidden="true" />
+              {t('Ver proyectos')} <ArrowUpRight aria-hidden="true" />
             </ActionLink>
             <ActionLink href="#sobre-mi" variant="ghost">
-              Conóceme <ArrowDown aria-hidden="true" />
+              {t('Conóceme')} <ArrowDown aria-hidden="true" />
             </ActionLink>
           </div>
         </div>
@@ -37,17 +43,18 @@ export function Hero() {
             <div className="hero-orb" />
           </div>
           <div className="floating-note note-top">
-            React + creatividad<small>Del componente a la experiencia.</small>
+            {t('React + creatividad')}
+            <small>{t('Del componente a la experiencia.')}</small>
           </div>
           <div className="floating-note note-bottom">
-            &lt;Ideas hechas interfaz /&gt;
-            <small>Diseñar. Construir. Pulir.</small>
+            {t('<Ideas hechas interfaz />')}
+            <small>{t('Diseñar. Construir. Pulir.')}</small>
           </div>
         </div>
       </section>
       <section className="stack-strip" aria-labelledby="stack-title">
         <p className="eyebrow" id="stack-title">
-          Mi stack /
+          {t('Mi stack /')}
         </p>
         {technologies.map((technology) => (
           <Tag key={technology}>{technology}</Tag>

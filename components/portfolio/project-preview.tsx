@@ -1,3 +1,6 @@
+'use client';
+import { useLanguage } from './language-provider';
+
 import { ArrowUpRight, CirclePlay, Plus } from 'lucide-react';
 import type { Project, ProjectPreviewKind } from '@/data/portfolio';
 
@@ -6,24 +9,26 @@ function assertNever(value: never): never {
 }
 
 function PreviewContent({ kind }: { kind: ProjectPreviewKind }) {
+  const { t } = useLanguage();
+
   switch (kind) {
     case 'characters':
       return (
         <>
           <p className="preview-title">
-            Explora el
+            {t('Explora el')}
             <br />
-            multiverso.
+            {t('multiverso.')}
           </p>
           <p className="preview-subtitle">
-            Busca y filtra personajes en tiempo real.
+            {t('Busca y filtra personajes en tiempo real.')}
           </p>
-          <div className="character-search">Buscar personaje...</div>
+          <div className="character-search">{t('Buscar personaje...')}</div>
           <div className="character-grid">
             {[
-              ['RS', 'Rick Sanchez', 'Vivo'],
-              ['MS', 'Morty Smith', 'Vivo'],
-              ['SM', 'Summer Smith', 'Vivo'],
+              ['RS', 'Rick Sanchez', t('Vivo')],
+              ['MS', 'Morty Smith', t('Vivo')],
+              ['SM', 'Summer Smith', t('Vivo')],
             ].map(([initials, name, status]) => (
               <div className="character-card" key={name}>
                 <span>{initials}</span>
@@ -38,16 +43,16 @@ function PreviewContent({ kind }: { kind: ProjectPreviewKind }) {
       return (
         <>
           <p className="preview-title">
-            Todo en orden.
+            {t('Todo en orden.')}
             <br />
-            Sin complicarte.
+            {t('Sin complicarte.')}
           </p>
           <p className="preview-subtitle">
-            Tu espacio financiero, en perspectiva.
+            {t('Tu espacio financiero, en perspectiva.')}
           </p>
           <div className="finance-grid">
             <div>
-              <span>Balance de ejemplo</span>
+              <span>{t('Balance de ejemplo')}</span>
               <strong>
                 $2.480<span>,00</span>
               </strong>
@@ -58,13 +63,13 @@ function PreviewContent({ kind }: { kind: ProjectPreviewKind }) {
               </div>
             </div>
             <div className="finance-goal">
-              <span>Meta del mes</span>
+              <span>{t('Meta del mes')}</span>
               <div className="goal-ring">
                 <strong>
                   72<span>%</span>
                 </strong>
               </div>
-              <span>Vas por buen camino</span>
+              <span>{t('Vas por buen camino')}</span>
             </div>
           </div>
         </>
@@ -73,11 +78,13 @@ function PreviewContent({ kind }: { kind: ProjectPreviewKind }) {
       return (
         <>
           <p className="preview-title">
-            Encuentra
+            {t('Encuentra')}
             <br />
-            tu ritmo.
+            {t('tu ritmo.')}
           </p>
-          <p className="preview-subtitle">Una colección para cada momento.</p>
+          <p className="preview-subtitle">
+            {t('Una colección para cada momento.')}
+          </p>
           <div className="music-grid">
             {['Deep focus', 'Slow days'].map((title, index) => (
               <div key={title} className={`music-cover cover-${index}`}>
@@ -95,20 +102,20 @@ function PreviewContent({ kind }: { kind: ProjectPreviewKind }) {
       return (
         <>
           <p className="preview-title">
-            Espacio para
+            {t('Espacio para')}
             <br />
-            tus ideas.
+            {t('tus ideas.')}
           </p>
-          <p className="preview-subtitle">Captura lo que importa.</p>
+          <p className="preview-subtitle">{t('Captura lo que importa.')}</p>
           <div className="note-paper">
             <div>
-              <span>Una idea para mañana</span>
+              <span>{t('Una idea para mañana')}</span>
               <Plus size={14} />
             </div>
             <p>
-              Las mejores interfaces empiezan
+              {t('Las mejores interfaces empiezan')}
               <br />
-              con una pregunta sencilla.
+              {t('con una pregunta sencilla.')}
             </p>
             <div className="note-lines">
               <i />

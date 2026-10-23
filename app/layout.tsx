@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/components/portfolio/language-provider';
 
 export const metadata: Metadata = {
   applicationName: 'Portafolio de Vladimir Williams',
@@ -24,10 +25,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <a className="skip-link" href="#contenido">
-          Saltar al contenido
-        </a>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

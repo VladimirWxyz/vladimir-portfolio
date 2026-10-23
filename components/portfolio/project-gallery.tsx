@@ -1,4 +1,5 @@
 'use client';
+import { useLanguage } from './language-provider';
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
@@ -35,6 +36,8 @@ interface ProjectGalleryProps {
 }
 
 export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
+  const { t } = useLanguage();
+
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -80,7 +83,7 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
         setApi={setApi}
         opts={{ loop: true, align: 'start' }}
         className="gallery-carousel"
-        aria-label={`Recorrido visual de ${projectName}`}
+        aria-label={`${t('Recorrido visual de')} ${projectName}`}
         tabIndex={0}
         onWheel={handleWheel}
         onKeyDownCapture={(event) => {
@@ -95,8 +98,8 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
           {images.map((image, index) => (
             <CarouselItem
               key={image.src}
-              aria-label={`${index + 1} de ${images.length}: ${image.caption}`}
-              aria-roledescription="diapositiva"
+              aria-label={`${index + 1} ${t('de')} ${images.length}: ${image.caption}`}
+              aria-roledescription={t('diapositiva')}
               inert={index !== selected}
               aria-hidden={index !== selected}
             >
@@ -123,12 +126,12 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
             <span> / {String(images.length).padStart(2, '0')}</span>
           </p>
           <fieldset className="gallery-pagination">
-            <legend className="sr-only">Elegir imagen</legend>
+            <legend className="sr-only">{t('Elegir imagen')}</legend>
             {images.map((image, index) => (
               <button
                 key={image.src}
                 type="button"
-                aria-label={`Ver ${image.caption}`}
+                aria-label={`${t('Ver')} ${image.caption}`}
                 aria-pressed={index === selected}
                 disabled={!api}
                 onClick={() => {
@@ -144,7 +147,7 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
             <ActionButton
               className="action-icon"
               variant="outline"
-              aria-label="Imagen anterior"
+              aria-label={t('Imagen anterior')}
               disabled={!api}
               onClick={() => navigate('previous')}
             >
@@ -155,10 +158,12 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
               variant="outline"
               aria-label={
                 reducedMotion
-                  ? 'Avance automático desactivado por preferencia de movimiento'
+                  ? t(
+                      'Avance automático desactivado por preferencia de movimiento',
+                    )
                   : autoplay
-                    ? 'Pausar avance automático'
-                    : 'Activar avance automático'
+                    ? t('Pausar avance automático')
+                    : t('Activar avance automático')
               }
               aria-pressed={!reducedMotion && autoplay}
               disabled={reducedMotion}
@@ -178,7 +183,7 @@ export function ProjectGallery({ images, projectName }: ProjectGalleryProps) {
             <ActionButton
               className="action-icon"
               variant="outline"
-              aria-label="Imagen siguiente"
+              aria-label={t('Imagen siguiente')}
               disabled={!api}
               onClick={() => navigate('next')}
             >

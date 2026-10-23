@@ -1,9 +1,18 @@
+'use client';
+import {
+  useLanguage,
+  usePortfolio,
+  LanguageSwitcher,
+} from './language-provider';
+
 import { ArrowUpRight, ArrowUp } from 'lucide-react';
 import { ActionLink } from './action-link';
-import { profile } from '@/data/portfolio';
 import { GitHubLogo, LinkedInLogo } from './brand-icons';
 import { ProfileAvatar } from './profile-avatar';
 export function SiteHeader() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   return (
     <header className="site-header" id="inicio">
       <div className="container header-inner">
@@ -12,23 +21,27 @@ export function SiteHeader() {
           <a
             className="brand"
             href="#inicio"
-            aria-label={`${profile.name}, inicio`}
+            aria-label={`${profile.name}, ${t('inicio')}`}
           >
             {profile.name}
           </a>
         </div>
-        <nav className="site-nav" aria-label="Navegación principal">
-          <a href="#proyectos">Proyectos</a>
-          <a href="#sobre-mi">Sobre mí</a>
+        <nav className="site-nav" aria-label={t('Navegación principal')}>
+          <a href="#proyectos">{t('Proyectos')}</a>
+          <a href="#sobre-mi">{t('Sobre mí')}</a>
           <ActionLink href="#contacto" variant="outline">
-            Hablemos <ArrowUpRight aria-hidden="true" />
+            {t('Hablemos')} <ArrowUpRight aria-hidden="true" />
           </ActionLink>
+          <LanguageSwitcher />
         </nav>
       </div>
     </header>
   );
 }
 export function SiteFooter() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   return (
     <footer className="site-footer container">
       <span>
@@ -47,7 +60,7 @@ export function SiteFooter() {
           </a>
         )}
         <a href="#inicio" className="actions">
-          Volver arriba <ArrowUp size={14} aria-hidden="true" />
+          {t('Volver arriba')} <ArrowUp size={14} aria-hidden="true" />
         </a>
       </div>
     </footer>

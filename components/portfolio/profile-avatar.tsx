@@ -1,4 +1,5 @@
 'use client';
+import { useLanguage, usePortfolio } from './language-provider';
 
 import Image from 'next/image';
 import { X } from 'lucide-react';
@@ -10,10 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { profile } from '@/data/portfolio';
 import { ActionButton } from './action-button';
 
 export function ProfileAvatar() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   if (!profile.avatarUrl) {
     return (
       <span className="brand-mark" aria-hidden="true">
@@ -26,7 +29,7 @@ export function ProfileAvatar() {
     <Dialog>
       <DialogTrigger
         className="avatar-trigger"
-        aria-label={`Ampliar fotografía de ${profile.name}`}
+        aria-label={`${t('Ampliar fotografía de')} ${profile.name}`}
       >
         <Image
           className="brand-avatar"
@@ -43,15 +46,15 @@ export function ProfileAvatar() {
         aria-describedby="avatar-description"
       >
         <DialogTitle className="sr-only">
-          Fotografía de {profile.name}
+          {t('Fotografía de')} {profile.name}
         </DialogTitle>
         <DialogDescription id="avatar-description" className="sr-only">
-          Retrato profesional de {profile.name}, frontend developer.
+          {t('Retrato profesional de')} {profile.name}, frontend developer.
         </DialogDescription>
         <Image
           className="avatar-full"
           src={profile.avatarUrl}
-          alt={`Retrato de ${profile.name}`}
+          alt={`${t('Retrato de')} ${profile.name}`}
           width={1000}
           height={1000}
           sizes="(max-width: 720px) calc(100vw - 2rem), 680px"
@@ -66,7 +69,7 @@ export function ProfileAvatar() {
               <ActionButton
                 variant="outline"
                 className="action-icon"
-                aria-label="Cerrar fotografía"
+                aria-label={t('Cerrar fotografía')}
               />
             }
           >

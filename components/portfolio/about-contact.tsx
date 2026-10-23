@@ -1,5 +1,7 @@
+'use client';
+import { useLanguage, usePortfolio } from './language-provider';
+
 import { ArrowUpRight, Code2, Layers3, MousePointer2 } from 'lucide-react';
-import { profile } from '@/data/portfolio';
 import { ActionLink } from './action-link';
 import { Section, Surface } from './layout';
 import { WhatsAppLogo } from './brand-icons';
@@ -21,18 +23,22 @@ const approach = [
   },
 ];
 export function About() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   return (
     <Section
       id="sobre-mi"
-      eyebrow="03 / Detrás del código"
-      title="Pienso en la experiencia y, construyo el código."
+      eyebrow={t('03 / Detrás del código')}
+      title={t('Pienso en la experiencia y, construyo el código.')}
     >
       <div className="about-grid">
         <div className="about-copy">
           <p>{profile.about}</p>
           <p>
-            Visualizo cómo se ve una idea, cómo podría usarla, y cómo se
-            construye. Disfruto conectar esas tres partes.
+            {t(
+              'Visualizo cómo se ve una idea, cómo podría usarla, y cómo se construye. Disfruto conectar esas tres partes.',
+            )}
           </p>
         </div>
         <div className="approach-list">
@@ -40,8 +46,8 @@ export function About() {
             <Surface key={title} className="approach-item">
               <Icon size={20} aria-hidden="true" />
               <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <h3>{t(title)}</h3>
+                <p>{t(text)}</p>
               </div>
             </Surface>
           ))}
@@ -51,6 +57,9 @@ export function About() {
   );
 }
 export function Contact() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolio();
+
   return (
     <section
       id="contacto"
@@ -59,31 +68,31 @@ export function Contact() {
     >
       <div className="contact-banner">
         <div>
-          <p className="eyebrow">De la idea al navegador</p>
+          <p className="eyebrow">{t('De la idea al navegador')}</p>
           <h2 id="contact-title">
-            Tu próxima interfaz
+            {t('Tu próxima interfaz')}
             <br />
-            empieza con un hola.
+            {t('empieza con un hola.')}
           </h2>
         </div>
         <div className="contact-action">
           {profile.email ? (
             <ActionLink href={`mailto:${profile.email}`} variant="outline">
-              Conectemos <ArrowUpRight aria-hidden="true" />
+              {t('Conectemos')} <ArrowUpRight aria-hidden="true" />
             </ActionLink>
           ) : profile.github ? (
             <ActionLink href={profile.github} external variant="outline">
-              Encuéntrame en GitHub <ArrowUpRight aria-hidden="true" />
+              {t('Encuéntrame en GitHub')} <ArrowUpRight aria-hidden="true" />
             </ActionLink>
           ) : profile.linkedin ? (
             <ActionLink href={profile.linkedin} external variant="outline">
-              Conectemos en LinkedIn <ArrowUpRight aria-hidden="true" />
+              {t('Conectemos en LinkedIn')} <ArrowUpRight aria-hidden="true" />
             </ActionLink>
           ) : !profile.whatsapp ? (
             <p>
-              Pronto compartiré aquí
+              {t('Pronto compartiré aquí')}
               <br />
-              mi correo y mis redes.
+              {t('mi correo y mis redes.')}
             </p>
           ) : null}
           {profile.whatsapp && (
